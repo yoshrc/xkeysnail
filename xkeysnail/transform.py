@@ -120,7 +120,10 @@ def K(exp):
     import re
     modifier_strs = []
     while True:
-        m = re.match(r"\A(LC|LCtrl|RC|RCtrl|C|Ctrl|LM|LAlt|RM|RAlt|M|Alt|LShift|RShift|Shift|LSuper|LWin|RSuper|RWin|Super|Win)-", exp)
+        m = re.match(
+            r"\A(LC|LCtrl|RC|RCtrl|C|Ctrl|LM|LAlt|RM|RAlt|M|Alt|LShift|RShift|Shift|LSuper|LWin|RSuper|RWin|Super|Win|E1|Extra1|E2|Extra2|E3|Extra3|E4|Extra4|E5|Extra5)-",
+            exp
+        )
         if m is None:
             break
         modifier = m.group(1)
@@ -161,6 +164,16 @@ def create_modifiers_from_strings(modifier_strs):
             modifiers.add(Modifier.R_SHIFT)
         elif modifier_str == 'Shift':
             modifiers.add(Modifier.SHIFT)
+        elif modifier_str == 'E1' or modifier_str == 'Extra1':
+            modifiers.add(Modifier.EXTRA1)
+        elif modifier_str == 'E2' or modifier_str == 'Extra2':
+            modifiers.add(Modifier.EXTRA2)
+        elif modifier_str == 'E3' or modifier_str == 'Extra3':
+            modifiers.add(Modifier.EXTRA3)
+        elif modifier_str == 'E4' or modifier_str == 'Extra4':
+            modifiers.add(Modifier.EXTRA4)
+        elif modifier_str == 'E5' or modifier_str == 'Extra5':
+            modifiers.add(Modifier.EXTRA)
     return modifiers
 
 # ============================================================

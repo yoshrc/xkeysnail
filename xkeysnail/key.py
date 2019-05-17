@@ -607,6 +607,13 @@ class Key(IntEnum):
     BTN_TRIGGER_HAPPY39 = 0x2e6
     BTN_TRIGGER_HAPPY40 = 0x2e7
 
+    # Extra modifiers
+    EXTRA1 = 0x301
+    EXTRA2 = 0x302
+    EXTRA3 = 0x303
+    EXTRA4 = 0x304
+    EXTRA5 = 0x305
+
     # We avoid low common keys in module aliases so they don't get huge. */
     KEY_MIN_INTERESTING = MUTE
     KEY_MAX             = 0x2ff
@@ -742,7 +749,8 @@ class Modifier(Enum):
     L_CONTROL, R_CONTROL, CONTROL, \
         L_ALT, R_ALT, ALT, \
         L_SHIFT, R_SHIFT, SHIFT, \
-        L_SUPER, R_SUPER, SUPER = range(12)
+        L_SUPER, R_SUPER, SUPER, \
+        EXTRA1, EXTRA2, EXTRA3, EXTRA4, EXTRA5 = range(17)
 
     @classmethod
     def _get_modifier_map(cls):
@@ -758,7 +766,12 @@ class Modifier(Enum):
             cls.SHIFT: {Key.LEFT_SHIFT, Key.RIGHT_SHIFT},
             cls.L_SUPER: {Key.LEFT_META},
             cls.R_SUPER: {Key.RIGHT_META},
-            cls.SUPER: {Key.LEFT_META, Key.RIGHT_META}
+            cls.SUPER: {Key.LEFT_META, Key.RIGHT_META},
+            cls.EXTRA1: {Key.EXTRA1},
+            cls.EXTRA2: {Key.EXTRA2},
+            cls.EXTRA3: {Key.EXTRA3},
+            cls.EXTRA4: {Key.EXTRA4},
+            cls.EXTRA5: {Key.EXTRA5},
         }
 
     def __str__(self):
@@ -774,6 +787,11 @@ class Modifier(Enum):
         if self.value == self.L_SUPER.value: return "LSuper"
         if self.value == self.R_SUPER.value: return "RSuper"
         if self.value == self.SUPER.value: return "Super"
+        if self.value == self.EXTRA1.value: return "Extra1"
+        if self.value == self.EXTRA2.value: return "Extra2"
+        if self.value == self.EXTRA3.value: return "Extra3"
+        if self.value == self.EXTRA4.value: return "Extra4"
+        if self.value == self.EXTRA5.value: return "Extra5"
         return None
 
     def is_specified(self):
@@ -784,7 +802,13 @@ class Modifier(Enum):
                 self.value == self.L_SHIFT.value or \
                 self.value == self.R_SHIFT.value or \
                 self.value == self.L_SUPER.value or \
-                self.value == self.R_SUPER.value
+                self.value == self.R_SUPER.value or \
+                self.value == self.EXTRA1.value or \
+                self.value == self.EXTRA2.value or \
+                self.value == self.EXTRA3.value or \
+                self.value == self.EXTRA4.value or \
+                self.value == self.EXTRA5.value
+
 
     def to_left(self):
         if self.value == self.CONTROL.value:
